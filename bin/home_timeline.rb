@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'fileutils'
 require 'yaml'
 require 'twitter'
 
@@ -26,7 +27,7 @@ end
 
 def save(tweet)
   puts tweet.id
-  File.mkdirs(File.join(data_dir, tweet.id.to_s[0..2]))
+  FileUtils.mkdir_p(File.join(data_dir, tweet.id.to_s[0..2]))
   File.open(File.join(data_dir, tweet.id.to_s[0..2], tweet.id.to_s), 'wb') {|f| f.write(tweet.attrs.to_json) }
 end
 
