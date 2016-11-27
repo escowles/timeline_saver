@@ -47,8 +47,10 @@ begin
     # since_id last id
     save tweet
   end
+rescue Twitter::Error::RequestTimeout => timeout
+  puts "timeout"
+  STDOUT.flush
 rescue Twitter::Error::TooManyRequests => error
   puts "rate limit exceeded, wait at least #{error.rate_limit.reset_in + 1}s..."
   STDOUT.flush
-  sleep error.rate_limit.reset_in + 1
 end
