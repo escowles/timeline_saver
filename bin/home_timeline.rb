@@ -27,8 +27,9 @@ end
 
 def save(tweet)
   puts tweet.id
-  FileUtils.mkdir_p(File.join(data_dir, tweet.id.to_s[0..2]))
-  File.open(File.join(data_dir, tweet.id.to_s[0..2], tweet.id.to_s), 'wb') {|f| f.write(tweet.attrs.to_json) }
+  bin = tweet.id.to_s.slice(0, tweet.id.to_s.length - 15)
+  FileUtils.mkdir_p(File.join(data_dir, bin))
+  File.open(File.join(data_dir, bin, tweet.id.to_s), 'wb') {|f| f.write(tweet.attrs.to_json) }
 end
 
 def opts
